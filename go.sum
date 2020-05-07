@@ -69,6 +69,8 @@ github.com/coinexchain/cosmos-sdk v0.37.710 h1:L5Um2mG8897YWas8p3MMkH61+zhoEIolI
 github.com/coinexchain/cosmos-sdk v0.37.710/go.mod h1:/VIQkL+RWyNbBLakvAQJ/LUnx5ZHTjL7uyGEAA+vDCg=
 github.com/coinexchain/cosmos-utils v0.0.0-20200109031554-f15ba3b1d6a7 h1:cIQxD8xh/Lp6m+PyRq7rkiLg8WPXtU5Fpr/P7jbDYpo=
 github.com/coinexchain/cosmos-utils v0.0.0-20200109031554-f15ba3b1d6a7/go.mod h1:JvdHh+tB6eBmuQ75l/QqSLx8Jj5rOoVS4DkLJrmYJgw=
+github.com/coinexchain/dex v0.2.17 h1:D7Fco5UIzMeC0mjQxMUkgWzqGX+ZMvz130+PWNSleD0=
+github.com/coinexchain/dex v0.2.17/go.mod h1:NA2ucoJflnPWTcRxNYosEU71Z8mg/r0Dv6ELQsffud0=
 github.com/coinexchain/dirtail v0.0.0-20200420013354-ae209e82d2da h1:OWQQQmOxMaEQI8U5gkdCELN98rE4hAlV7bC9b2arRK4=
 github.com/coinexchain/dirtail v0.0.0-20200420013354-ae209e82d2da/go.mod h1:Oj6tzJsSHS5QkaB2UMgXoxR8ubsf/DeEwo90DIJAx10=
 github.com/coinexchain/randsrc v0.0.0-20191012073615-acfab7318ec6 h1:ResmUJSlC5h17IL5ZUAOZCwRZELSLr4m1/VowdLfreM=
@@ -108,6 +110,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
+github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200506085303-b1b35baace05 h1:xc0uPryO49DMH1nTO0hn3Bee+MXuPC+FHIgh2Cm0UtY=
+github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200506085303-b1b35baace05/go.mod h1:snUkg9n7FJECoWxBQ1AQtmL8WT2RK/LsmbuAcH87Z7U=
 github.com/eapache/go-resiliency v1.1.0 h1:1NtRmCAqadE2FN4ZcN6g90TP3uk8cg9rn9eNK2197aU=
 github.com/eapache/go-resiliency v1.1.0/go.mod h1:kFI+JgMyC7bLPUVY133qvEBtVayf5mFgVsvEsIPBvNs=
 github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 h1:YEetp8/yCZMuEPMUDHG0CW/brkkEp8mzqk2+ODEitlw=
@@ -242,6 +246,8 @@ github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40T
 github.com/rakyll/statik v0.1.5/go.mod h1:OEi9wJV/fMUAGx1eNjq75DKDsJVuEv1U0oYdX6GX8Zs=
 github.com/rakyll/statik v0.1.6 h1:uICcfUXpgqtw2VopbIncslhAmE5hwc4g20TEyEENBNs=
 github.com/rakyll/statik v0.1.6/go.mod h1:OEi9wJV/fMUAGx1eNjq75DKDsJVuEv1U0oYdX6GX8Zs=
+github.com/rakyll/statik v0.1.7 h1:OF3QCZUuyPxuGEP7B4ypUa7sB/iHtqOTDYZXGM8KOdQ=
+github.com/rakyll/statik v0.1.7/go.mod h1:AlZONWzMtEnMs7W4e/1LURLiI49pIMmp6V9Unghqrcc=
 github.com/rcrowley/go-metrics v0.0.0-20180503174638-e2704e165165/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=
 github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a h1:9ZKAASQSHhDYGoxY8uLVpewe1GDZ2vu2Tr/vTdVAkFQ=
 github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=

@@ -19,4 +19,19 @@ A public chain built for the decentralized exchange
 
 ### build
 
+
 Reference [quick start](docs/quickstart.md)
+
+### FAQs
+
+* I got 'make: statik: No such file or directory' message during make run.
+Please run the following command to install statik and make sure GOPATH/bin is in your PATH. 
+
+```
+go get -d github.com/rakyll/statik
+go install github.com/rakyll/statik
+```
+
+* I got 'fatal error: 'rocksdb/c.h' file not found' message during make run
+
+Please install RocksDB before building dex. You may run into issue described here [https://github.com/Homebrew/homebrew-core/issues/8392]
