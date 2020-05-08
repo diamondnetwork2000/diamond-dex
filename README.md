@@ -22,6 +22,23 @@ A public chain built for the decentralized exchange
 
 Reference [quick start](docs/quickstart.md)
 
+### configurations
+
+* Start cetd with required parameters
+
+```
+cetd start --minimum-gas-prices="0.1cet"
+```
+* Start HTTP server
+
+```
+cetcli rest-server --chain-id=coinexdex-test1 --laddr=tcp://0.0.0.0:1317 --node tcp://localhost:26657 --trust-node=true
+```
+
+* Block commit interval
+
+Change the value of 'timeout_commit' in config/config.toml.
+
 ### FAQs
 
 * I got 'make: statik: No such file or directory' message during make run.

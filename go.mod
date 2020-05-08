@@ -21,7 +21,8 @@ require (
 	github.com/tendermint/tm-db v0.2.0
 )
 
+replace github.com/coinexchain/cet-sdk => github.com/diamondnetwork2000/diamond-sdk 9657902
+
 replace github.com/cosmos/cosmos-sdk => github.com/coinexchain/cosmos-sdk v0.37.710
-replace github.com/coinexchain/cet-sdk => github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200506085303-b1b35baace05
 
 replace github.com/tendermint/tendermint => github.com/coinexchain/tendermint v0.32.905

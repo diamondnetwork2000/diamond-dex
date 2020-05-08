@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "3.0"
-  title: CET-Lite for CoinEx Chain
+  title: RPC server for Diamond Chain
   description: A REST interface for state queries, transaction generation and broadcasting.
 tags:
   - name: Transactions
@@ -37,7 +37,7 @@ tags:
 schemes:
   - https
   - http
-host: dex-api.coinex.org
+host: api.diamondnetwork.org
 securityDefinitions:
   kms:
     type: basic
@@ -664,6 +664,117 @@ paths:
       responses:
         200:
           description: Tx was succesfully generated
+          schema:
+            $ref: "#/definitions/StdTx"
+        400:
+          description: Invalid request
+        500:
+          description: Server internal error
+  /auth/sign:
+    post:
+      summary: Sign the message with private key
+      operationId: signMessage
+      tags:
+        - Auth
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: privKey
+          description: The private key in HEX format
+          required: true
+          type: string
+          x-example: a96e62ed3955e65be32703f12d87b6b5cf26039ecfa948dc5107a495418e5330
+        - in: query
+          name: message
+          description: The message to sign
+          required: true
+          x-example: abc
+      responses:
+        200:
+          description: The message was signed successfully
+          schema:
+            $ref: "#/definitions/AuthSign"
+        400:
+          description: Invalid request
+        500:
+          description: Server internal error
+  /auth/verify:
+    get:
+      summary: Verify if the signature of the message is correct or not
+      operationId: verifyMessage
+      tags:
+        - Auth
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: pubKey
+          description: The public key in HEX format (33 Bytes)
+          required: true
+          type: string
+          x-example: 02950E1CDFCB133D6024109FD489F734EEB4502418E538C28481F22BCE276F248C
+        - in: query
+          name: message
+          description: The message
+          required: true
+          x-example: abc
+        - in: query
+          name: signature
+          description: The signature in HEX format
+          required: true
+      responses:
+        200:
+          description: 
+          schema:
+            $ref: "#/definitions/AuthSign"
+        400:
+          description: Invalid request
+        500:
+          description: Server internal error
+  /auth/signTx:
+    post:
+      summary: Sign the transaction with private key
+      operationId: signTx
+      tags:
+        - Auth
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: privKey
+          description: The private key in HEX format
+          required: true
+          type: string
+          x-example: a96e62ed3955e65be32703f12d87b6b5cf26039ecfa948dc5107a495418e5330
+        - in: query
+          name: chainId
+          description: the chain id in the response of /node_info
+          required: true
+          type: string
+        - in: query
+          name: accountNumber
+          description: the account_number in the response of /auth/accounts/{address}
+          required: true
+          type: integer
+        - in: query
+          name: sequence
+          description: the sequence in the response of /auth/accounts/{address}
+          required: true
+          type: integer
+        - in: body
+          name: tx
+          description: The response of /bank/accounts/{address}/transfers
+          required: true
+      responses:
+        200:
+          description: The message was signed successfully
           schema:
             $ref: "#/definitions/StdTx"
         400:
@@ -6465,4 +6576,25 @@ definitions:
       amount:
         type: string
         example: "0"
+  AuthSign:
+    type: object
+    properties:
+      privKey:
+        type: string
+        description: The private key in HEX format
+      pubKey:
+        type: string
+        description: The public key in HEX format
+      message:
+        type: string
+        description: "0"
+        example: "abc"
+      signature:
+        type: string
+        description: The signature in HEX format
+      result:
+        type: bool
+        example: "true"
+        description: true in case of signature is correct
+  
         

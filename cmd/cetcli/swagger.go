@@ -33,7 +33,7 @@ func serveSwagger(fs http.FileSystem) http.HandlerFunc {
 
 	swaggerHost := viper.GetString(FlagSwaggerHost)
 	if swaggerHost != "" {
-		swagger = strings.Replace(swagger, "host: dex-api.coinex.org", "host: "+swaggerHost, -1)
+		swagger = strings.Replace(swagger, "host: api.diamondnetwork.org", "host: "+swaggerHost, -1)
 	}
 
 	if viper.GetBool(FlagDefaultHTTP) {
