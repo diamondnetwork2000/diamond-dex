@@ -54,6 +54,7 @@ It looks like the fee amount in your tx is less than (gas price * gas limit)
 
 * gas price too low
 
+
 It looks like the calculated gas price (fee / gas limit) in your tx is less than the minimal gas price limit (min_gas_price_limit in the genesis.json).
 
 Note: Update method ConsumeGas in file ${GOPATH}/pkg/mod/github.com/cosmos-sdk/store/types/gas.go
