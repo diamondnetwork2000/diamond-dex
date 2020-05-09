@@ -1,11 +1,10 @@
-module github.com/diamondnetwork2000/dex
+module github.com/coinexchain/dex
 
 go 1.13
 
 require (
 	github.com/coinexchain/cet-sdk v0.2.17-0.20200422093521-1a8e2c0d4d8c
 	github.com/coinexchain/codon v0.0.0-20191012070227-3ee72dde596c
-	github.com/coinexchain/dex v0.2.17
 	github.com/coinexchain/randsrc v0.0.0-20191012073615-acfab7318ec6
 	github.com/coinexchain/trade-server v0.2.8-0.20200423021423-12d59229ce5a
 	github.com/cosmos/cosmos-sdk v0.37.4
@@ -21,7 +20,7 @@ require (
 	github.com/tendermint/tm-db v0.2.0
 )
 
-replace github.com/coinexchain/cet-sdk => github.com/diamondnetwork2000/diamond-sdk 9657902
+replace github.com/coinexchain/cet-sdk => github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200509054716-1f85cbe4932e
 
 replace github.com/cosmos/cosmos-sdk => github.com/coinexchain/cosmos-sdk v0.37.710
 
