@@ -43,19 +43,19 @@ func accAddressFromBech32(address string) sdk.AccAddress {
 
 func createCetToken(ownerAddr string) asset.Token {
 	token := &asset.BaseToken{
-		Name:             "CoinEx Chain Native Token",
+		Name:             "Diamond Chain Fee Token",
 		Symbol:           dex.CET,
-		TotalSupply:      sdk.NewInt(587767527061317189),
+		TotalSupply:      sdk.NewInt(100000000000000000),
 		Owner:            accAddressFromBech32(ownerAddr),
 		SendLock:         sdk.ZeroInt(),
-		Mintable:         false,
-		Burnable:         true,
+		Mintable:         true,
+		Burnable:         false,
 		AddrForbiddable:  false,
 		TokenForbiddable: false,
-		TotalBurn:        sdk.NewInt(412232472938682811),
-		TotalMint:        sdk.ZeroInt(),
+		TotalBurn:        sdk.ZeroInt(),
+		TotalMint:        sdk.NewInt(50000000000000000),
 		IsForbidden:      false,
-		URL:              "https://www.coinex.org",
+		URL:              "https://www.diamondnetwork.org",
 		Description:      "Decentralized public chain ecosystem, Born for financial liberalization",
 	}
 	if err := token.Validate(); err != nil {

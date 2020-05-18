@@ -3599,7 +3599,8 @@ paths:
                 example: abc/cet
               time:
                 type: string
-                example: 7
+                description: The effective time when the cancelation happened. the value should be greater than (current nano time + the expiration time of trading pair)
+                example: a number with 19 digits
             additionalProperties: false
       responses:
         200:

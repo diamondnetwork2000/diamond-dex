@@ -149,10 +149,21 @@ the tax (100000 * 0.02 = 2000) is go to community pool, can be spent by calling 
 
 ##
 
+create node -> start node -> 
 reactor.poolRoutine start goroutine and waiting for stop signal
 
 get block from pool
-reactor.processBlock -> execution.ApplyBlock -> Commit
+reactor.processBlock -> execution.ApplyBlock (validate)-> execution.Commit -> app.Commit
+-> /rootmulti/store.Commit()
+//fixme
+/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go
+execution.ApplyBlock
+if err := blockExec.ValidateBlock(state, block); err != nil {
+                if !strings.Contains(err.Error(),"wrong Block.Header.AppHash") {
+                   return state, ErrInvalidBlock(err)
+                }
+        }
+
 
 peer.newPeer -> peer.createMConnection, when a block is return by peer
 call reactor.Receive -> pool.AddBlock add block to poll
@@ -163,3 +174,78 @@ replay.ReplayBlocks
 app.initMsgQue -> msg_queue.NewProducer
 -> producer.init create writer for each brokers:
 -> msg_wirter.createMsgWriter
+
+### standby server
+
+
+github.com/tendermint/tendermint/state.validateBlock(0x55b80a0, 0x76c6238, 0x55cd020, 0xc0000101c0, 0xa, 0x0, 0xc000e3c9d0, 0x7, 0xc000e3ca00, 0xf, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/validation.go:19 +0x37
+github.com/tendermint/tendermint/state.(*BlockExecutor).ValidateBlock(...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go:115
+github.com/tendermint/tendermint/state.(*BlockExecutor).ApplyBlock(0xc00025b5e0, 0xa, 0x0, 0xc000e3c9d0, 0x7, 0xc000e3ca00, 0xf, 0x536, 0x5, 0xc0002b63e0, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go:126 +0x113
+github.com/tendermint/tendermint/consensus.(*Handshaker).replayBlock(0xc0004df110, 0xa, 0x0, 0xc000e3c9d0, 0x7, 0xc000e3ca00, 0xf, 0x536, 0x5, 0xc0002b63e0, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/consensus/replay.go:479 +0x233
+github.com/tendermint/tendermint/consensus.(*Handshaker).ReplayBlocks(0xc000145110, 0xa, 0x0, 0xc000e3c9d0, 0x7, 0xc000e3ca00, 0xf, 0x536, 0x5, 0xc0002b63e0, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/consensus/replay.go:398 +0xdff
+github.com/tendermint/tendermint/consensus.(*Handshaker).Handshake(0xc0004df110, 0x55cd920, 0xc00025b420, 0x80, 0x4f4ab40)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/consensus/replay.go:270 +0x489
+github.com/tendermint/tendermint/node.doHandshake(0x55cd020, 0xc0000101c0, 0xa, 0x0, 0xc000e3c9d0, 0x7, 0xc000e3ca00, 0xf, 0x536, 0x5, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/node/node.go:284 +0x19a
+github.com/tendermint/tendermint/node.NewNode(0xc000ec6f00, 0x55b0920, 0xc00016a5a0, 0xc0002fd3d0, 0x55864e0, 0xc0004d68a0, 0xc0002fd670, 0x532c0b8, 0xc0002fd680, 0x55b77a0, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/node/node.go:616 +0x3c1
+github.com/cosmos/cosmos-sdk/server.startInProcess(0xc000eb30c0, 0x532c938, 0x1d, 0x0, 0x0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/cosmos-sdk@v0.37.710/server/start.go:154 +0x4fe
+github.com/cosmos/cosmos-sdk/server.StartCmd.func1(0xc000edef00, 0x76c6238, 0x0, 0x0, 0x0, 0x0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/cosmos-sdk@v0.37.710/server/start.go:66 +0xb4
+github.com/spf13/cobra.(*Command).execute(0xc000edef00, 0x76c6238, 0x0, 0x0, 0xc000edef00, 0x76c6238)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:826 +0x453
+github.com/spf13/cobra.(*Command).ExecuteC(0xc000eb0780, 0x2, 0xc000eb3480, 0x51487cf)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:914 +0x2fb
+github.com/spf13/cobra.(*Command).Execute(...)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:864
+github.com/tendermint/tendermint/libs/cli.Executor.Execute(0xc000eb0780, 0x532cd70, 0x2, 0xc000e861e0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/libs/cli/setup.go:89 +0x3c
+main.main()
+	/Users/linmingren/go/src/github.com/diamondnetwork2000/diamond-dex/cmd/cetd/main.go:50 +0xba
+
+
+
+  github.com/tendermint/tendermint/blockchain/v0.(*BlockchainReactor).OnStart(0xc0000a8340, 0xc00057b440, 0x1a)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/blockchain/v0/reactor.go:113 +0x26
+github.com/tendermint/tendermint/libs/common.(*BaseService).Start(0xc0000a8340, 0x0, 0x0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/libs/common/service.go:139 +0x2f5
+github.com/tendermint/tendermint/p2p.(*Switch).OnStart(0xc000c71320, 0xc00057b3c0, 0x13)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/p2p/switch.go:223 +0xb8
+github.com/tendermint/tendermint/libs/common.(*BaseService).Start(0xc000c71320, 0xc000576ac0, 0x28)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/libs/common/service.go:139 +0x2f5
+github.com/tendermint/tendermint/node.(*Node).OnStart(0xc00015fa20, 0xc0000c14c0, 0xd)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/node/node.go:805 +0x2b8
+github.com/tendermint/tendermint/libs/common.(*BaseService).Start(0xc00015fa20, 0x55b0920, 0xc000440f00)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/libs/common/service.go:139 +0x2f5
+github.com/cosmos/cosmos-sdk/server.startInProcess(0xc000021320, 0x532c938, 0x1d, 0x0, 0x0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/cosmos-sdk@v0.37.710/server/start.go:168 +0x52c
+github.com/cosmos/cosmos-sdk/server.StartCmd.func1(0xc00043c500, 0x76c6238, 0x0, 0x0, 0x0, 0x0)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/cosmos-sdk@v0.37.710/server/start.go:66 +0xb4
+github.com/spf13/cobra.(*Command).execute(0xc00043c500, 0x76c6238, 0x0, 0x0, 0xc00043c500, 0x76c6238)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:826 +0x453
+github.com/spf13/cobra.(*Command).ExecuteC(0xc0001c7400, 0x2, 0xc0000216e0, 0x51487cf)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:914 +0x2fb
+github.com/spf13/cobra.(*Command).Execute(...)
+	/Users/linmingren/go/pkg/mod/github.com/spf13/cobra@v0.0.5/command.go:864
+github.com/tendermint/tendermint/libs/cli.Executor.Execute(0xc0001c7400, 0x532cd70, 0x2, 0xc000bc3f80)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/libs/cli/setup.go:89 +0x3c
+main.main()
+	/Users/linmingren/go/src/github.com/diamondnetwork2000/diamond-dex/cmd/cetd/main.go:50 +0xba
+
+
+  github.com/tendermint/tendermint/state.validateBlock(0x55b7720, 0xc00015f8c0, 0x55cd020, 0xc0000bc2f8, 0xa, 0x0, 0xc0000c0a00, 0x7, 0xc0000c0c50, 0xf, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/validation.go:19 +0x37
+github.com/tendermint/tendermint/state.(*BlockExecutor).ValidateBlock(...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go:115
+github.com/tendermint/tendermint/state.(*BlockExecutor).ApplyBlock(0xc0001c9500, 0xa, 0x0, 0xc0000c0a00, 0x7, 0xc0000c0c50, 0xf, 0x57c, 0x5, 0xc000cc3040, ...)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go:126 +0x113
+github.com/tendermint/tendermint/blockchain/v0.(*BlockchainReactor).poolRoutine(0xc0000a8340)
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/blockchain/v0/reactor.go:342 +0x967
+created by github.com/tendermint/tendermint/blockchain/v0.(*BlockchainReactor).OnStart
+	/Users/linmingren/go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/blockchain/v0/reactor.go:119 +0x89
