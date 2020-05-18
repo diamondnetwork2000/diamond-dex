@@ -76,6 +76,8 @@ github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200509054716-1f85cbe4932e/go.
 github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200509064724-8e6b02016a3f/go.mod h1:D0iZFjS3+8+Eot9lzRq5pJLRD4DZahYpeFDW3rkyjWs=
 github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200509070627-0f77fbf240f3 h1:bByRCo/JQLE63jMJ5bQdbhMNPQgLeQkxA252tcEyqsg=
 github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200509070627-0f77fbf240f3/go.mod h1:D0iZFjS3+8+Eot9lzRq5pJLRD4DZahYpeFDW3rkyjWs=
+github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200518041726-02f688c96d88 h1:wXwdyDm2N/k5IZgtYIzObzGqZLDB/ZdbCuwSJKyBXPg=
+github.com/diamondnetwork2000/diamond-sdk v0.0.0-20200518041726-02f688c96d88/go.mod h1:D0iZFjS3+8+Eot9lzRq5pJLRD4DZahYpeFDW3rkyjWs=
 github.com/eapache/go-resiliency v1.1.0 h1:1NtRmCAqadE2FN4ZcN6g90TP3uk8cg9rn9eNK2197aU=
 github.com/eapache/go-resiliency v1.1.0/go.mod h1:kFI+JgMyC7bLPUVY133qvEBtVayf5mFgVsvEsIPBvNs=
 github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 h1:YEetp8/yCZMuEPMUDHG0CW/brkkEp8mzqk2+ODEitlw=
