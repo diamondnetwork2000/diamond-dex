@@ -17,7 +17,7 @@ if [ -d "${HOME}/.cetcli" ]; then
     exit 1
 fi
 
-cetd init moniker0 --chain-id=diamonddex-test1
+cetd init diamonddex --chain-id=diamonddex
 cetcli keys add bob <<<$'12345678\n12345678\n'
 cetd add-genesis-account $(cetcli keys show bob -a) 100000000000000000dgss
 cetd add-genesis-token --name="Diamond Chain Native Token" \
