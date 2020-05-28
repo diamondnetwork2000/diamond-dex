@@ -34,7 +34,7 @@ cetd add-genesis-token --name="Diamond Chain Native Token" \
 	--url="www.diamondnetwork.org" \
 	--description="A public chain built for the decentralized exchange" \
         --identity="552A83BA62F9B1F8"
-cetd gentx --amount=1000000000000dgss --min-self-delegation=1000000000000 --name bob <<<$'12345678\n12345678\n'
+cetd gentx --amount=500000000000000dgss --min-self-delegation=500000000000000 --name bob <<<$'12345678\n12345678\n'
 cetd collect-gentxs
 
 echo DONE!
