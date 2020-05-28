@@ -142,10 +142,21 @@ CreateProposalBlock -> state.MakeBlock
 
 Fee goes to validator can be queryed through distribution/validators.
 
-For example, if community_tax in genesis.json is 0.02, and fee is 100000, then validator received 100000 * (1 - 0.02) = 98000.
+For example, if community_tax in genesis.json is 0.02, and fee is 100000, then validator received 100000 * (1 - 0.02) = 98000. the amount received by validator contains 2 parts:
+
+* validator commission
+* delegator reward
 
 the tax (100000 * 0.02 = 2000) is go to community pool, can be spent by calling /gov/proposals/community_pool_spend
 
+## How to configure incentive account
+
+Add the following line to the genesis.json file. the account is the string value of
+sdk.AccAddress(crypto.AddressHash([]byte("incentive_pool")))
+
+```
+cetd add-genesis-account "dkd1gc5t98jap4zyhmhmyq5af5s7pyv57w56hyvt07" xxxxxdgss
+```
 
 ##
 

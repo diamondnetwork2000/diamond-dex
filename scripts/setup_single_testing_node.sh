@@ -19,22 +19,22 @@ fi
 
 cetd init diamonddex --chain-id=diamonddex
 cetcli keys add bob <<<$'12345678\n12345678\n'
-cetd add-genesis-account $(cetcli keys show bob -a) 100000000000000000dgss
+cetd add-genesis-account $(cetcli keys show bob -a) 210000000000000000dgss
 cetd add-genesis-token --name="Diamond Chain Native Token" \
 	--symbol="dgss" \
 	--owner=$(cetcli keys show bob -a)  \
-	--total-supply=1000000000000000000 \
-	--mintable=true \
+	--total-supply=210000000000000000 \
+	--mintable=false \
 	--burnable=true \
 	--addr-forbiddable=false \
 	--token-forbiddable=false \
 	--total-burn=0 \
-	--total-mint=900000000000000000 \
+	--total-mint=0 \
 	--is-forbidden=false \
 	--url="www.diamondnetwork.org" \
 	--description="A public chain built for the decentralized exchange" \
         --identity="552A83BA62F9B1F8"
-cetd gentx --amount=50000000000000000dgss --min-self-delegation=50000000000000000 --name bob <<<$'12345678\n12345678\n'
+cetd gentx --amount=1000000000000dgss --min-self-delegation=1000000000000 --name bob <<<$'12345678\n12345678\n'
 cetd collect-gentxs
 
 echo DONE!
