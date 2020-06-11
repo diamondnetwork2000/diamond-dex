@@ -9537,6 +9537,7 @@ func GetSupportList() []string {
 		"github.com/coinexchain/cet-sdk/modules/market/internal/types.MsgCreateOrder",
 		"github.com/coinexchain/cet-sdk/modules/market/internal/types.MsgCreateTradingPair",
 		"github.com/coinexchain/cet-sdk/modules/market/internal/types.MsgModifyPricePrecision",
+		"github.com/coinexchain/cet-sdk/modules/market/internal/types.MsgModifyFeeRate",
 		"github.com/coinexchain/cet-sdk/modules/market/internal/types.Order",
 		"github.com/cosmos/cosmos-sdk/types.AccAddress",
 		"github.com/cosmos/cosmos-sdk/types.Coin",
