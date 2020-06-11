@@ -109,6 +109,7 @@ type (
 	MsgCreateOrder           = market.MsgCreateOrder
 	MsgCreateTradingPair     = market.MsgCreateTradingPair
 	MsgModifyPricePrecision  = market.MsgModifyPricePrecision
+	MsgModifyFeeRate         = market.MsgModifyFeeRate
 	Order                    = market.Order
 	MarketInfo               = market.MarketInfo
 	MsgDonateToCommunityPool = distrx.MsgDonateToCommunityPool

@@ -6690,6 +6690,69 @@ func RandMsgModifyPricePrecision(r RandSrc) MsgModifyPricePrecision {
 } //End of RandMsgModifyPricePrecision
 
 // Non-Interface
+func EncodeMsgModifyFeeRate(w io.Writer, v MsgModifyFeeRate) error {
+	// codon version: 1
+	var err error
+	err = codonEncodeByteSlice(w, v.Sender[:])
+	if err != nil {
+		return err
+	}
+	err = codonEncodeString(w, v.TradingPair)
+	if err != nil {
+		return err
+	}
+	err = codonEncodeString(w, v.BuyFeeRate)
+	if err != nil {
+		return err
+	}
+	err = codonEncodeString(w, v.SellFeeRate)
+	if err != nil {
+		return err
+	}
+	return nil
+} //End of EncodeMsgModifyPricePrecision
+
+func DecodeMsgModifyFeeRate(bz []byte) (MsgModifyFeeRate, int, error) {
+	// codon version: 1
+	var err error
+	var length int
+	var v MsgModifyFeeRate
+	var n int
+	var total int
+	length = codonDecodeInt(bz, &n, &err)
+	if err != nil {
+		return v, total, err
+	}
+	bz = bz[n:]
+	total += n
+	v.Sender, n, err = codonGetByteSlice(bz, length)
+	if err != nil {
+		return v, total, err
+	}
+	bz = bz[n:]
+	total += n
+	v.TradingPair = string(codonDecodeString(bz, &n, &err))
+	if err != nil {
+		return v, total, err
+	}
+	bz = bz[n:]
+	total += n
+	v.BuyFeeRate = string(codonDecodeString(bz, &n, &err))
+	if err != nil {
+		return v, total, err
+	}
+	bz = bz[n:]
+	total += n
+	v.SellFeeRate = string(codonDecodeString(bz, &n, &err))
+	if err != nil {
+		return v, total, err
+	}
+	bz = bz[n:]
+	total += n
+	return v, total, nil
+} //End of DecodeMsgModifyPricePrecision
+
+// Non-Interface
 func EncodeOrder(w io.Writer, v Order) error {
 	// codon version: 1
 	var err error
@@ -7716,6 +7779,9 @@ func DecodeMsg(bz []byte) (Msg, int, error) {
 	case [4]byte{40, 158, 40, 18}:
 		v, n, err := DecodeMsgModifyTokenInfo(bz[4:])
 		return v, n + 4, err
+	case [4]byte{76, 91, 156, 198}:
+		v, n, err := DecodeMsgModifyFeeRate(bz[4:])
+		return v, n + 4, err
 	case [4]byte{207, 152, 156, 90}:
 		v, n, err := DecodeMsgMultiSend(bz[4:])
 		return v, n + 4, err
@@ -8074,6 +8140,8 @@ func getMagicBytes(name string) []byte {
 		return []byte{66, 148, 56, 203}
 	case "MsgModifyPricePrecision":
 		return []byte{76, 91, 156, 199}
+	case "MsgModifyFeeRate":
+		return []byte{76, 91, 156, 198}
 	case "MsgModifyTokenInfo":
 		return []byte{40, 158, 40, 18}
 	case "MsgMultiSend":
@@ -8375,6 +8443,12 @@ func EncodeAny(w io.Writer, x interface{}) error {
 	case *MsgModifyPricePrecision:
 		w.Write(getMagicBytes("MsgModifyPricePrecision"))
 		return EncodeMsgModifyPricePrecision(w, *v)
+	case MsgModifyFeeRate:
+		w.Write(getMagicBytes("MsgModifyFeeRate"))
+		return EncodeMsgModifyFeeRate(w, v)
+	case *MsgModifyFeeRate:
+		w.Write(getMagicBytes("MsgModifyFeeRate"))
+		return EncodeMsgModifyFeeRate(w, *v)
 	case MsgModifyTokenInfo:
 		w.Write(getMagicBytes("MsgModifyTokenInfo"))
 		return EncodeMsgModifyTokenInfo(w, v)
