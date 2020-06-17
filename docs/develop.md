@@ -170,7 +170,7 @@ reactor.processBlock -> execution.ApplyBlock (validate)-> execution.Commit -> ap
 /go/pkg/mod/github.com/coinexchain/tendermint@v0.32.905/state/execution.go
 execution.ApplyBlock
 if err := blockExec.ValidateBlock(state, block); err != nil {
-                if !strings.Contains(err.Error(),"wrong Block.Header.AppHash") {
+                if !strings.Contains(err.Error(),"Wrong Block.Header.AppHash") {
                    return state, ErrInvalidBlock(err)
                 }
         }
