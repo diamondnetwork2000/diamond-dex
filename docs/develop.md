@@ -149,6 +149,17 @@ For example, if community_tax in genesis.json is 0.02, and fee is 100000, then v
 
 the tax (100000 * 0.02 = 2000) is go to community pool, can be spent by calling /gov/proposals/community_pool_spend
 
+
+## query rest method
+
+* Define route in modules/xxx/client/rest/rest.go
+the query method goes to modules/xxx/client/rest.query.go and update method
+goes to tx.go
+* The rest method in modules/xxx/client/rest/query.go define a path
+for example: QueryBalances
+* The modules/xxx/internal/keeper/querier.go will call method according to what path is
+* The modules/xxx/handler.go will call update method
+
 ## How to configure incentive account
 
 Add the following line to the genesis.json file. the account is the string value of
